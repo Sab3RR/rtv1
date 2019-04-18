@@ -1,5 +1,18 @@
 #include "inc/rtv1.h"
 
+int		ft_cline(char *buf, int k)
+{
+	int	c;
+
+	c = 0;
+	while (buf[k] != '\n' && buf[k] != '\0')
+	{
+		k++;
+		c++;
+	}
+	return (++c);
+}
+
 int		ft_open(char *s, int *fd)
 {
 	if (BUFF_SIZE < 1)
@@ -38,6 +51,32 @@ char	*get_buf(char *s, int *nbl)
 		return (NULL);
 	}
 	return (buf);
+}
+
+char	**ft_getscene(char *buf, int nbl, int k)
+{
+	int		i;
+	int		j;
+	char	**sc;
+
+	j = 0;
+	if (!buf)
+		return (NULL);
+	if (!(sc = (char **)malloc(sizeof(char *) * (nbl + 1))))
+		return (NULL);
+	while (buf[j] != '\0' && k < nbl)
+	{
+		i = 0;
+		if (!(sc[k] = (char *)malloc(sizeof(char) * ft_cline(buf, j))))
+			return (NULL);
+		while (buf[j] != '\n' && buf[j] != '\0')
+			sc[k][i++] = buf[j++];
+		sc[k][i] = '\0';
+		k++;
+		j++;
+	}
+	free(buf);
+	return (sc);
 }
 
 int		init_mlx(t_var *var, char *str)

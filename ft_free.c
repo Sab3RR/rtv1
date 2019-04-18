@@ -1,5 +1,18 @@
 #include "inc/rtv1.h"
 
+void	ft_init_mlx_var(t_var *var)
+{
+	var->obj = NULL;
+	var->light = NULL;
+	var->hud = 1;
+	var->spec = 0;
+	var->maxref = 0;
+	var->pref = 0;
+	var->selection = 0;
+	var->aa = 1;
+}
+
+
 int		ft_free_lists(t_o *ob1, t_o *ob2)
 {
 	t_o	*fst;

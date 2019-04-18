@@ -55,7 +55,7 @@ typedef struct		s_var
 	t_vec			cam_pos;
 	t_vec			k;
 	t_vec			ray_dir;
-	t_vec			cam_dir;
+	t_vec			cam_rot;
 	t_vec			ref;
 	t_vec			norm;
 	t_vec			refpos;
@@ -111,5 +111,6 @@ typedef struct		s_th
 }					t_th;
 
 int					ft_free_arg(t_var *var, char *buf, int i);
+void				ft_init_mlx_var(t_var *var);
 
 #endif

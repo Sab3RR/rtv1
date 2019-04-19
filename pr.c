@@ -1,6 +1,56 @@
 #include "inc/rtv1.h"
 
-int		checkscene(t_var *var, int i)
+t_o	*add_ol(t_var *var, t_o *obj)
+{
+	t_o	*obj2;
+
+	obj2 = var->obj;
+	if (var->obj == NULL)
+		return (obj);
+	while (var->obj->next != NULL)
+		var->obj = var->obj->next;
+	var->obj->next = obj;
+	return (obj2);
+}
+
+t_o	*add_ll(t_var *var, t_o *obj)
+{
+	t_o	*obj2;
+
+	obj2 = var->light;
+	if (var->light == NULL)
+		return (obj);
+	while (var->light->next != NULL)
+		var->light = var->light->next;
+	var->light->next = obj;
+	return (obj2);
+}
+
+int	parse_objects(t_var *var, int i)
+{
+	int	res;
+
+	while (i < var->nbl - 1)
+	{
+		if (ft_strcmp(var->scene[i], "	object(light)") == 0)
+			res = add_l(var, &i, 6);
+		else if (ft_strcmp(var->scene[i], "	object(cone)") == 0)
+			res = add_cc(var, &i, 1, 6);
+		else if (ft_strcmp(var->scene[i], "	object(cylinder)") == 0)
+			res = add_cc(var, &i, 2, 6);
+		else if (ft_strcmp(var->scene[i], "	object(plane)") == 0)
+			res = add_pl(var, &i, 6);
+		else if (ft_strcmp(var->scene[i], "	object(sphere)") == 0)
+			res = add_sp(var, &i, 7);
+		else
+			return (ft_free_lists(var->light, var->obj));
+		if (res == -1)
+			return (ft_free_lists(var->light, var->obj));
+	}
+	return (0);
+}
+
+int	checkscene(t_var *var, int i)
 {
 	if (ft_strcmp(var->scene[0], "scene") != 0)
 		return (-1);
@@ -27,7 +77,7 @@ int		checkscene(t_var *var, int i)
 	return (0);
 }
 
-int		parser(t_var *var)
+int	parser(t_var *var)
 {
 	t_o		*obj;
 
@@ -37,7 +87,7 @@ int		parser(t_var *var)
 			ft_strcmp(var->scene[7], "{") != 0 || \
 			ft_strcmp(var->scene[var->nbl - 1], "}") != 0)
 		return (-1);
-	if (ft_parse_objects(var, 8) == -1)
+	if (parse_objects(var, 8) == -1)
 		return (-1);
 	if (ft_check_objects(var, (obj = NULL)) == -1)
 	{

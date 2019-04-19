@@ -112,5 +112,11 @@ typedef struct		s_th
 
 int					ft_free_arg(t_var *var, char *buf, int i);
 void				ft_init_mlx_var(t_var *var);
+t_o					*add_ll(t_var *var, t_o *obj);
+int					add_l(t_var *var, int *k, int i);
+int					add_cc(t_var *var, int *k, int t, int i);
+t_o					*add_ol(t_var *var, t_o *obj);
+int					add_pl(t_var *var, int *k, int i);
+int					add_sp(t_var *var, int *k, int i);
 
 #endif

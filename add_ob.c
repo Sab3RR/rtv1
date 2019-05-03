@@ -93,7 +93,7 @@ int	add_l(t_var *var, int *k, int i)
 	if (var->scene[*k + 3][i] != ')')
 		return (-1);
 	obj->next = NULL;
-	var->light = add_ll(var, link);
+	var->light = add_ll(var, obj);
 	*k += 5;
 	return (0);
 }

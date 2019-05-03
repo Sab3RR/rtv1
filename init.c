@@ -93,12 +93,12 @@ int		init_mlx(t_var *var, char *str)
 							   &var->endian);
 	var->nbl = 0;
 	if ((buf = get_buf(str, &(var->nbl))) == NULL)
-		return (ft_free_arg(var, buf, 0));
+		return (free_arg(var, buf, 0));
 	if ((var->scene = ft_getscene(buf, var->nbl, 0)) == NULL)
-		return (ft_free_arg(var, NULL, 1));
-	ft_init_mlx_var(var);
-	if (ft_parser(var) == -1)
-		return (ft_free_arg(var, NULL, 2));
+		return (free_arg(var, NULL, 1));
+	init_var(var);
+	if (parser(var) == -1)
+		return (free_arg(var, NULL, 2));
 	return (0);
 }
 

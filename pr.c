@@ -43,9 +43,9 @@ int	parse_objects(t_var *var, int i)
 		else if (ft_strcmp(var->scene[i], "	object(sphere)") == 0)
 			res = add_sp(var, &i, 7);
 		else
-			return (ft_free_lists(var->light, var->obj));
+			return (free_lists(var->light, var->obj));
 		if (res == -1)
-			return (ft_free_lists(var->light, var->obj));
+			return (free_lists(var->light, var->obj));
 	}
 	return (0);
 }
@@ -89,7 +89,7 @@ int	parser(t_var *var)
 		return (-1);
 	if (parse_objects(var, 8) == -1)
 		return (-1);
-	if (ft_check_objects(var, (obj = NULL)) == -1)
+	if (check_obj(var, (obj = NULL)) == -1)
 	{
 		ft_putendl("error: incorrect values for color/size");
 		return (-1);

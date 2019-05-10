@@ -129,5 +129,5 @@ float	*light(t_thr *thr, t_o *tmp, t_o *light, float *tab)
 		light = light->next;
 	}
 	thr->refpos = (t_vec){thr->ray_dir.x, thr->ray_dir.y, thr->ray_dir.z};
-	return ((COND) ? tab : reflect_obj(thr, tmp, &pos, tab));
+	return ((PREF) ? tab : reflect_obj(thr, tmp, &pos, tab));
 }

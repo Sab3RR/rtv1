@@ -34,6 +34,7 @@ char	*get_buf(char *s, int *nbl)
 	char	*buf;
 	char	*line;
 	char 	*buf2;
+	char	*s1;
 
 	buf = ft_strnew(1);
 	if (ft_open(s, &fd) == -1)
@@ -41,15 +42,18 @@ char	*get_buf(char *s, int *nbl)
 	while (get_next_line(fd, &line) > 0 && (*nbl)++ > -1)
 	{
 		buf2 = buf;
-		buf = ft_strjoin(buf2, ft_strjoin(line, "\n"));
+		s1 = ft_strjoin(line, "\n");
+		buf = ft_strjoin(buf2, s1);
 		free(buf2);
 		free(line);
+		free(s1);
 	}
 	if (close(fd) == -1)
 	{
 		ft_putendl(ft_strjoin("error: ", strerror(errno)));
 		return (NULL);
 	}
+	free(line);
 	return (buf);
 }
 
@@ -62,7 +66,7 @@ char	**ft_getscene(char *buf, int nbl, int k)
 	j = 0;
 	if (!buf)
 		return (NULL);
-	if (!(sc = (char **)malloc(sizeof(char *) * (nbl + 1))))
+	if (!(sc = (char **)malloc(sizeof(char *) * (nbl))))
 		return (NULL);
 	while (buf[j] != '\0' && k < nbl)
 	{
@@ -96,6 +100,7 @@ int		init_mlx(t_var *var, char *str)
 		return (free_arg(var, buf, 0));
 	if ((var->scene = ft_getscene(buf, var->nbl, 0)) == NULL)
 		return (free_arg(var, NULL, 1));
+	system("leaks rtv1");
 	init_var(var);
 	if (parser(var) == -1)
 		return (free_arg(var, NULL, 2));

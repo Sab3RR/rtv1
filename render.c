@@ -105,7 +105,9 @@ int				render(t_var *var)
 	mlx_clear_window(var->mlx_ptr, var->win_ptr);
 	var->img_ptr = mlx_new_image(var->mlx_ptr, D_WIDTH, D_HEIGHT);
 //	var->aa = 2;
-//	var->maxref = 1;
+	var->maxref = 0;
+	var->pref = 1;
+	var->spec = 1;
 	while (++i < P_THREADS)
 	{
 		tab[i].i = i;
@@ -116,6 +118,6 @@ int				render(t_var *var)
 	while (++i < P_THREADS)
 		(void)pthread_join(thr[i], &ret);
 	mlx_put_image_to_window(var->mlx_ptr, var->win_ptr, var->img_ptr, 0, 0);
-//	ft_hud(var);
+	hud(var);
 	return (0);
 }

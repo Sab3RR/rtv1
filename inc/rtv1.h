@@ -149,4 +149,5 @@ float				sp(t_thr *thr, t_vec dist, float d, float lambert);
 float				*light(t_thr *thr, t_o *tmp, t_o *light, float *tab);
 float				*fequlizer(float *r, float *tab);
 float				finit_cone(t_thr *thr, t_o *obj, t_vec ray);
+void				hud(t_var *var);
 #endif

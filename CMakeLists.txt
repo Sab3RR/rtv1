@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 project(rtv1 C)
 
 set(CMAKE_C_STANDARD 99)
-set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit ")
+set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -fmudflap")
 file(GLOB LIB libft/*.c)
 file(GLOB INCLIB libft/*.h)
 

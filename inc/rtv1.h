@@ -20,8 +20,15 @@
 # define J thr->j
 # define I thr->i
 
+# define CAMX var->cam_pos.x
+# define CAMY var->cam_pos.y
+# define CAMZ var->cam_pos.z
+
+# define OBJ var->tmp
+
 # define COND thr->spec == 1 && tmp->type != 3
 # define PREF thr->pref == 1 && tmp->type != 3
+# define JOINFREE (OBJ->type != 3) ? ft_strjoin("size: ", i) : NULL; free(i);
 
 # define SP mlx_string_put
 
@@ -150,4 +157,7 @@ float				*light(t_thr *thr, t_o *tmp, t_o *light, float *tab);
 float				*fequlizer(float *r, float *tab);
 float				finit_cone(t_thr *thr, t_o *obj, t_vec ray);
 void				hud(t_var *var);
+int					mouse(int button, int x, int y, t_var *var);
+void				strput(t_var *var);
+int					keys(int key, t_var *var);
 #endif

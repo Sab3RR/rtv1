@@ -21,9 +21,9 @@ int		main(int argc, char **argv)
 //	ft_instructions();
 	if (render(var) == -1)
 		return (0);
-//	mlx_mouse_hook(var->win_ptr, ft_mouse, var);
+	mlx_mouse_hook(var->win_ptr, mouse, var);
 //	mlx_hook(var->win_ptr, 17, (1L << 17), close_hook, var);
-//	mlx_hook(var->win_ptr, 2, (1L << 17), key_hook, var);
+	mlx_hook(var->win_ptr, 2, (1L << 17), keys, var);
 	mlx_loop(var->mlx_ptr);
 	return (0);
 }

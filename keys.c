@@ -24,7 +24,7 @@ int			objectsrot(int keys, t_var *var)
 		OBJ->rot.y = OBJ->rot.y * cosf(0.5) + OBJ->rot.z * (-sinf(0.5));
 		OBJ->rot.z = tmp_rot * sinf(0.5) + OBJ->rot.z * cosf(0.5);
 	}
-	return (ft_last_hook(keys, var));
+	return (rot_hook(keys, var));
 }
 
 int		parameters(int keys, t_var *var)
@@ -74,9 +74,9 @@ int		ft_hook_add(int keys, t_var *var)
 		if (keys == 53)
 			close_hook(var);
 		parameters(keys, var);
-		ft_draw(var);
-		ft_string_put(var);
-		SP(var->mlx_ptr, var->win_ptr, 550, 735, 0x00FEDC, var->pos);
+		render(var);
+		strput(var);
+		SP(var->mlx_ptr, var->win_ptr, 800, 735, 0x0B2F9B, var->pos);
 		free(var->pos);
 		(OBJ->type != 4) ? free(var->rot) : NULL;
 		return (-1);
@@ -95,28 +95,14 @@ int			keys(int key, t_var *var)
 {
 	float	tmp_pos;
 
-//	if (ft_hook_add(key, var) == -1)
-//		return (0);
-	if (key == 123 && (tmp_pos = var->cam_pos.x) < 20000)
-	{
-		CAMX = var->cam_pos.x * cosf(0.05) + var->cam_pos.z * sinf(0.05);
-		CAMZ = tmp_pos * (-sinf(0.05)) + var->cam_pos.z * cosf(0.05);
-	}
-	else if (key == 124 && (tmp_pos = var->cam_pos.x) > -20000)
-	{
-		CAMX = var->cam_pos.x * cosf(-0.05) + var->cam_pos.z * sinf(-0.05);
-		CAMZ = tmp_pos * (-sinf(-0.05)) + var->cam_pos.z * cosf(-0.05);
-	}
-	else if (key == 125 && (tmp_pos = var->cam_pos.y) > -20000)
-	{
-		CAMY = var->cam_pos.y * cosf(-0.05) + var->cam_pos.z * (-sinf(-0.05));
-		CAMZ = tmp_pos * sinf(-0.05) + var->cam_pos.z * cosf(-0.05);
-	}
-	else if (key == 126 && (tmp_pos = var->cam_pos.y) < 20000)
-	{
-		CAMY = var->cam_pos.y * cosf(0.05) + var->cam_pos.z * (-sinf(0.05));
-		CAMZ = tmp_pos * sinf(0.05) + var->cam_pos.z * cosf(0.05);
-	}
+	var->k = ft_vectorsub(&var->cam_rot, &var->cam_pos);
+	ft_vectornorm(&var->k);
+	var->i = ft_vectorcross(&var->k, &(t_vec){0.0, 1.0, 0.0});
+	ft_vectornorm(&var->i);
+	var->j = ft_vectorcross(&var->i, &var->k);
+	if (ft_hook_add(key, var) == -1)
+		return (0);
+	cam_rot(key, var, tmp_pos);
 	render(var);
 	if (OBJ != NULL)
 	{

@@ -160,4 +160,6 @@ void				hud(t_var *var);
 int					mouse(int button, int x, int y, t_var *var);
 void				strput(t_var *var);
 int					keys(int key, t_var *var);
+void				cam_rot(int key, t_var *var,float tmp_pos);
+int 				rot_hook(int key, t_var *var);
 #endif

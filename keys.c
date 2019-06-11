@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 17:51:25 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 17:51:29 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
-int			objectsrot(int keys, t_var *var)
+int		objectsrot(int keys, t_var *var)
 {
 	float	tmp_rot;
 
@@ -37,26 +49,26 @@ int		parameters(int keys, t_var *var)
 		OBJ->size = (OBJ->size > 6) ? OBJ->size - 5 : OBJ->size;
 	else if (keys == 0)
 		OBJ->pos = (t_vec){OBJ->pos.x + 10.0 * var->i.x,
-						   OBJ->pos.y + 10.0 * var->i.y, OBJ->pos.z + 10.0 * var->i.z};
+						SOMEMACRO1};
 	else if (keys == 2)
 		OBJ->pos = (t_vec){OBJ->pos.x - 10.0 * var->i.x,
-						   OBJ->pos.y - 10.0 * var->i.y, OBJ->pos.z - 10.0 * var->i.z};
+						SOMEMACRO2};
 	else if (keys == 13)
 		OBJ->pos = (t_vec){OBJ->pos.x + 10.0 * var->j.x,
-						   OBJ->pos.y + 10.0 * var->j.y, OBJ->pos.z + 10.0 * var->j.z};
+						SOMEMACRO3};
 	else if (keys == 1)
 		OBJ->pos = (t_vec){OBJ->pos.x - 10.0 * var->j.x,
-						   OBJ->pos.y - 10.0 * var->j.y, OBJ->pos.z - 10.0 * var->j.z};
+						SOMEMACRO4};
 	else if (keys == 69)
 		OBJ->pos = (t_vec){OBJ->pos.x - 10.0 * var->k.x,
-						   OBJ->pos.y - 10.0 * var->k.y, OBJ->pos.z - 10.0 * var->k.z};
+						SOMEMACRO5};
 	else if (keys == 78)
 		OBJ->pos = (t_vec){OBJ->pos.x + 10.0 * var->k.x,
-						   OBJ->pos.y + 10.0 * var->k.y, OBJ->pos.z + 10.0 * var->k.z};
+						SOMEMACRO6};
 	return (objectsrot(keys, var));
 }
 
-int			close_hook(t_var *var)
+int		close_hook(t_var *var)
 {
 	free_lists(var->light, var->obj);
 	mlx_destroy_image(var->mlx_ptr, var->img_ptr);
@@ -84,14 +96,14 @@ int		ft_hook_add(int keys, t_var *var)
 	if (keys == 78)
 	{
 		var->cam_rot = (t_vec){var->cam_rot.x - 10.0 * var->k.x,
-							   var->cam_rot.y - 10.0 * var->k.y, var->cam_rot.z - 10.0 * var->k.z};
+							SOMEMACRO7};
 		var->cam_pos = (t_vec){var->cam_pos.x - 10.0 * var->k.x,
-							   var->cam_pos.y - 10.0 * var->k.y, var->cam_pos.z - 10.0 * var->k.z};
+							SOMEMACRO7};
 	}
 	return (0);
 }
 
-int			keys(int key, t_var *var)
+int		keys(int key, t_var *var)
 {
 	float	tmp_pos;
 
@@ -109,5 +121,5 @@ int			keys(int key, t_var *var)
 		strput(var);
 		SP(var->mlx_ptr, var->win_ptr, 800, 735, 0x0B2F9B, var->pos);
 	}
-//	return (ft_translation(key, var));
+	return (cam_f(key, var));
 }

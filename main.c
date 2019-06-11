@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 17:44:31 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 17:44:35 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 int		main(int argc, char **argv)
 {
 	t_var	*var;
 
-	argv[1] = "scene7.rt";
+	argv[1] = "scene1.rt";
 	argc = 2;
 	if (argc != 2)
 	{
@@ -18,11 +30,10 @@ int		main(int argc, char **argv)
 		free(var);
 		return (0);
 	}
-//	ft_instructions();
 	if (render(var) == -1)
 		return (0);
 	mlx_mouse_hook(var->win_ptr, mouse, var);
-//	mlx_hook(var->win_ptr, 17, (1L << 17), close_hook, var);
+	mlx_hook(var->win_ptr, 17, (1L << 17), ft_close, var);
 	mlx_hook(var->win_ptr, 2, (1L << 17), keys, var);
 	mlx_loop(var->mlx_ptr);
 	return (0);

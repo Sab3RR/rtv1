@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_ob.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 18:04:52 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 18:04:56 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
-int	c_n_p(t_var *var, t_o *obj, int k)
+int		c_n_p(t_var *var, t_o *obj, int k)
 {
 	int	i;
 
@@ -22,7 +34,7 @@ int	c_n_p(t_var *var, t_o *obj, int k)
 	return (0);
 }
 
-int			add_sp(t_var *var, int *k, int i)
+int		add_sp(t_var *var, int *k, int i)
 {
 	t_o	*obj;
 
@@ -45,7 +57,7 @@ int			add_sp(t_var *var, int *k, int i)
 	return (0);
 }
 
-int			add_pl(t_var *var, int *k, int i)
+int		add_pl(t_var *var, int *k, int i)
 {
 	t_o	*obj;
 
@@ -69,7 +81,7 @@ int			add_pl(t_var *var, int *k, int i)
 	return (0);
 }
 
-int	add_l(t_var *var, int *k, int i)
+int		add_l(t_var *var, int *k, int i)
 {
 	t_o	*obj;
 
@@ -98,7 +110,7 @@ int	add_l(t_var *var, int *k, int i)
 	return (0);
 }
 
-int	add_cc(t_var *var, int *k, int t, int i)
+int		add_cc(t_var *var, int *k, int t, int i)
 {
 	t_o	*obj;
 

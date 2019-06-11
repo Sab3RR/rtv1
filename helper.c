@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 18:20:55 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 18:21:00 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 void	fzero(float *s, int n)
@@ -30,8 +42,8 @@ t_vec	norm(t_thr *thr, t_o *obj, t_vec pos)
 	if (obj->type == 1 || obj->type == 2)
 	{
 		temp = ft_vectorscale(&obj->rot,
-							  (ft_vectordot(&thr->ray_dir, &obj->rot) * thr->t0
-							   + ft_vectordot(&thr->dist, &obj->rot)));
+						(ft_vectordot(&thr->ray_dir, &obj->rot) * thr->t0
+						+ ft_vectordot(&thr->dist, &obj->rot)));
 		if (obj->type == 1)
 			temp = ft_vectorscale(&temp, (1 + pow(tan(obj->size), 2)));
 		temp2 = ft_vectorsub(&pos, &obj->pos);
@@ -45,7 +57,7 @@ t_vec	norm(t_thr *thr, t_o *obj, t_vec pos)
 	return (norm);
 }
 
-float		*addlight(t_o *obj, t_o *light, float *tab, float d)
+float	*addlight(t_o *obj, t_o *light, float *tab, float d)
 {
 	tab[3] = equalizer(tab[3] * 4.0 * d, 0.0, 1.0);
 	tab[0] += tab[3] * (obj->col.red / 255) * (light->col.red / 255);

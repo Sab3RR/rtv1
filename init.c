@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 18:06:55 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 18:06:59 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 int		ft_cline(char *buf, int k)
@@ -33,7 +45,7 @@ char	*get_buf(char *s, int *nbl)
 	int		fd;
 	char	*buf;
 	char	*line;
-	char 	*buf2;
+	char	*buf2;
 	char	*s1;
 
 	buf = ft_strnew(1);
@@ -94,7 +106,7 @@ int		init_mlx(t_var *var, char *str)
 	var->win_ptr = mlx_new_window(var->mlx_ptr, D_WIDTH, D_HEIGHT, name);
 	free(name);
 	var->img_addr = mlx_get_data_addr(var->img_ptr, &var->bpp, &var->size_line,
-							   &var->endian);
+			&var->endian);
 	var->nbl = 0;
 	if ((buf = get_buf(str, &(var->nbl))) == NULL)
 		return (free_arg(var, buf, 0));
@@ -106,4 +118,3 @@ int		init_mlx(t_var *var, char *str)
 		return (free_arg(var, NULL, 2));
 	return (0);
 }
-

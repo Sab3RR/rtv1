@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   light.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 17:01:21 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 17:01:25 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
-t_o	*nearest_ref(t_thr *thr, t_o *node, t_o *obj, t_vec pos)
+t_o		*nearest_ref(t_thr *thr, t_o *node, t_o *obj, t_vec pos)
 {
 	t_o		*tmp;
 	double	dist;
@@ -29,13 +41,13 @@ t_o	*nearest_ref(t_thr *thr, t_o *node, t_o *obj, t_vec pos)
 	return (tmp);
 }
 
-t_o	*ref_init(t_thr *thr, t_o *obj, t_vec *pos)
+t_o		*ref_init(t_thr *thr, t_o *obj, t_vec *pos)
 {
 	t_o	*tmp;
 
 	thr->t = 8000.0;
 	thr->ref = ft_vectorscale(&thr->norm,
-							  (2 * ft_vectordot(&thr->refpos, &thr->norm)));
+			(2 * ft_vectordot(&thr->refpos, &thr->norm)));
 	thr->ref = ft_vectorsub(&thr->refpos, &thr->ref);
 	ft_vectornorm(&thr->ref);
 	tmp = nearest_ref(thr, thr->obj, obj, *pos);
@@ -50,7 +62,7 @@ t_o	*ref_init(t_thr *thr, t_o *obj, t_vec *pos)
 
 int		shadow(t_thr *mlx, t_o *tmp, t_o *light, t_vec pos)
 {
-	t_o	*obj;
+	t_o		*obj;
 	t_vec	dist;
 
 	obj = mlx->obj;
@@ -111,8 +123,9 @@ float	*light(t_thr *thr, t_o *tmp, t_o *light, float *tab)
 	t_vec	pos;
 	float	d;
 
-	pos = (t_vec){thr->cam_pos.x + thr->t * thr->ray_dir.x, thr->cam_pos.y +
-			   thr->t * thr->ray_dir.y, thr->cam_pos.z + thr->t * thr->ray_dir.z};
+	pos = (t_vec){thr->cam_pos.x + thr->t * thr->ray_dir.x,
+			thr->cam_pos.y + thr->t * thr->ray_dir.y,
+			thr->cam_pos.z + thr->t * thr->ray_dir.z};
 	thr->norm = norm(thr, tmp, pos);
 	while (light != NULL)
 	{

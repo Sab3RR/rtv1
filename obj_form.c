@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   obj_form.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 17:04:50 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 17:04:54 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 double	nearest_cone(t_thr *thr, t_o *obj, t_vec ray, t_vec pos)
@@ -11,7 +23,8 @@ double	nearest_cone(t_thr *thr, t_o *obj, t_vec ray, t_vec pos)
 	thr->a = ft_vectordot(&ray, &ray) - (1 + pow(angl, 2)) *
 			pow(ft_vectordot(&ray, &obj->rot), 2);
 	thr->b = 2 * (ft_vectordot(&ray, &thr->dist) - (1 + pow(angl, 2))
-			* ft_vectordot(&ray, &obj->rot) * ft_vectordot(&thr->dist, &obj->rot));
+			* ft_vectordot(&ray, &obj->rot)
+			* ft_vectordot(&thr->dist, &obj->rot));
 	thr->c = ft_vectordot(&thr->dist, &thr->dist) - (1 +
 			pow(angl, 2)) * pow(ft_vectordot(&thr->dist, &obj->rot), 2);
 	disc = thr->b * thr->b - 4 * thr->a * thr->c;
@@ -22,7 +35,6 @@ double	nearest_cone(t_thr *thr, t_o *obj, t_vec ray, t_vec pos)
 	if (thr->t0 > thr->t1)
 		thr->t0 = thr->t1;
 	return (finit_cone(thr, obj, ray));
-//	return (thr->t0);
 }
 
 double	nearest_cylinder(t_thr *thr, t_o *obj, t_vec ray, t_vec pos)
@@ -33,9 +45,10 @@ double	nearest_cylinder(t_thr *thr, t_o *obj, t_vec ray, t_vec pos)
 	ft_vectornorm(&obj->rot);
 	thr->a = ft_vectordot(&ray, &ray) - pow(ft_vectordot(&ray, &obj->rot), 2);
 	thr->b = 2 * (ft_vectordot(&ray, &thr->dist) -
-				  (ft_vectordot(&ray, &obj->rot) * ft_vectordot(&thr->dist, &obj->rot)));
+			(ft_vectordot(&ray, &obj->rot) *
+			ft_vectordot(&thr->dist, &obj->rot)));
 	thr->c = ft_vectordot(&thr->dist, &thr->dist) -
-			 pow(ft_vectordot(&thr->dist, &obj->rot), 2) - pow(obj->size, 2);
+			pow(ft_vectordot(&thr->dist, &obj->rot), 2) - pow(obj->size, 2);
 	disc = thr->b * thr->b - 4 * thr->a * thr->c;
 	if (disc < 0)
 		return (-1);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cone.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 18:25:10 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 18:25:14 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 t_vec	ft_vectoradd(t_vec vec1, t_vec vec2)
@@ -46,7 +58,6 @@ short	higher_than_max(double t, t_thr *thr, t_o *obj, t_vec ray)
 	return (0);
 }
 
-
 float	finit_cone(t_thr *thr, t_o *obj, t_vec ray)
 {
 	short	r1_too_low;
@@ -58,7 +69,6 @@ float	finit_cone(t_thr *thr, t_o *obj, t_vec ray)
 	r1_too_high = higher_than_max(thr->t0, thr, obj, ray);
 	r2_too_low = lower_than_min(thr->t1, thr, obj, ray);
 	r2_too_high = higher_than_max(thr->t1, thr, obj, ray);
-
 	if (r1_too_low == 1 || r1_too_high == 1)
 	{
 		if (r2_too_low == 1 || r2_too_high == 1)
@@ -68,5 +78,3 @@ float	finit_cone(t_thr *thr, t_o *obj, t_vec ray)
 	else
 		return (thr->t0);
 }
-
-

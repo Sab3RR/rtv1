@@ -1,12 +1,20 @@
-//
-// Created by Vadim SUSOL on 2019-04-16.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rtv1.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 18:09:44 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 18:09:48 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef RTV1_H
-#define RTV1_H
+# define RTV1_H
 
 # include "../libft/libft.h"
-# include <mlx.h>
+# include "mlx.h"
 # include <errno.h>
 # include <pthread.h>
 # include <fcntl.h>
@@ -25,14 +33,28 @@
 # define CAMZ var->cam_pos.z
 
 # define OBJ var->tmp
+# define NEWMACRO var->cam_rot.z - 10.0 * var->k.z
+# define NEW free(i); tmp_str(var)
+
+# define CYLINDER "object: cylinder"
+# define NOSELECT "no selection"
+# define SOMEMACRO var->cam_pos.y + v, var->cam_pos.z
+# define SOMEMACRO1 OBJ->pos.y + 10.0 * var->i.y, OBJ->pos.z + 10.0 * var->i.z
+# define SOMEMACRO2 OBJ->pos.y - 10.0 * var->i.y, OBJ->pos.z - 10.0 * var->i.z
+# define SOMEMACRO3 OBJ->pos.y + 10.0 * var->j.y, OBJ->pos.z + 10.0 * var->j.z
+# define SOMEMACRO4 OBJ->pos.y - 10.0 * var->j.y, OBJ->pos.z - 10.0 * var->j.z
+# define SOMEMACRO5 OBJ->pos.y - 10.0 * var->k.y, OBJ->pos.z - 10.0 * var->k.z
+# define SOMEMACRO6 OBJ->pos.y + 10.0 * var->k.y, OBJ->pos.z + 10.0 * var->k.z
+# define SOMEMACRO7 var->cam_rot.y - 10.0 * var->k.y, NEWMACRO
+# define AAOFF "anti-aliasing: off"
 
 # define COND thr->spec == 1 && tmp->type != 3
 # define PREF thr->pref == 1 && tmp->type != 3
-# define JOINFREE (OBJ->type != 3) ? ft_strjoin("size: ", i) : NULL; free(i);
+# define JOINFREE (OBJ->type != 3) ? ft_strjoin("size: ", i) : NULL; NEW
 
 # define SP mlx_string_put
 
-#define FOV 2.0
+# define FOV 2.0
 
 typedef struct		s_c
 {
@@ -147,7 +169,8 @@ void				fzero(float *s, int n);
 t_o					*nearest_obj(t_thr *thr, t_o *obj, t_vec ray, t_vec pos);
 float				equalizer(float value, float min, float max);
 double				nearest_cone(t_thr *thr, t_o *obj, t_vec ray, t_vec pos);
-double				nearest_cylinder(t_thr *thr, t_o *obj, t_vec ray, t_vec pos);
+double				nearest_cylinder(t_thr *thr, t_o *obj,
+		t_vec ray, t_vec pos);
 double				nearest_sphere(t_thr *thr, t_o *obj, t_vec ray, t_vec pos);
 double				nearest_plane(t_thr *thr, t_o *obj, t_vec ray, t_vec pos);
 t_vec				norm(t_thr *thr, t_o *obj, t_vec pos);
@@ -160,6 +183,8 @@ void				hud(t_var *var);
 int					mouse(int button, int x, int y, t_var *var);
 void				strput(t_var *var);
 int					keys(int key, t_var *var);
-void				cam_rot(int key, t_var *var,float tmp_pos);
-int 				rot_hook(int key, t_var *var);
+void				cam_rot(int key, t_var *var, float tmp_pos);
+int					rot_hook(int key, t_var *var);
+int					ft_close(t_var *var);
+int					cam_f(int keys, t_var *var);
 #endif

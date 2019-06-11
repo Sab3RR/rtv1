@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mouse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 17:24:00 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 17:24:04 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 void	str(t_var *var)
@@ -27,7 +39,7 @@ void	str(t_var *var)
 void	tmp_str(t_var *var)
 {
 	char	*s;
-	char 	*c;
+	char	*c;
 	char	*d;
 
 	c = ft_itoa(OBJ->pos.z);
@@ -58,14 +70,13 @@ void	strput(t_var *var)
 	char	*i;
 
 	i = ft_itoa(OBJ->size);
-	s = JOINFREE
-	tmp_str(var);
+	s = JOINFREE;
 	if (OBJ->type == 1 || OBJ->type == 2)
 	{
 		if (OBJ->type == 1)
 			SP(var->mlx_ptr, var->win_ptr, 800, 720, 0x0B2F9B, "object: cone");
 		if (OBJ->type == 2)
-			SP(var->mlx_ptr, var->win_ptr, 800, 720, 0x0B2F9B, "object: cylinder");
+			SP(var->mlx_ptr, var->win_ptr, 800, 720, 0x0B2F9B, CYLINDER);
 		SP(var->mlx_ptr, var->win_ptr, 800, 750, 0x0B2F9B, var->rot);
 		SP(var->mlx_ptr, var->win_ptr, 800, 765, 0x0B2F9B, s);
 	}
@@ -96,13 +107,12 @@ t_o		*seek(double u, double v, t_vec cam, t_var *var)
 	ft_vectornorm(&I);
 	J = ft_vectorcross(&I, &K);
 	var->ray_dir = (t_vec){u * I.x + v * J.x + FOV * K.x, u * I.y + v * J.y
-														  + FOV * K.y, u * I.z + v * J.z + FOV * K.z};
+						+ FOV * K.y, u * I.z + v * J.z + FOV * K.z};
 	ft_vectornorm(&var->ray_dir);
 	obj = nearest_obj(thr, obj, var->ray_dir, cam);
 	free(thr);
 	return (obj);
 }
-
 
 int		mouse(int button, int x, int y, t_var *var)
 {
@@ -117,9 +127,9 @@ int		mouse(int button, int x, int y, t_var *var)
 		mlx_put_image_to_window(var->mlx_ptr, var->win_ptr, var->img_ptr, 0, 0);
 		hud(var);
 		if ((var->tmp = seek(u, v, (t_vec){var->cam_pos.x + u,
-									 var->cam_pos.y + v, var->cam_pos.z}, var)) == NULL)
+								SOMEMACRO}, var)) == NULL)
 		{
-			SP(var->mlx_ptr, var->win_ptr, 800, 720, 0x0B2F9B, "no selection");
+			SP(var->mlx_ptr, var->win_ptr, 800, 720, 0x0B2F9B, NOSELECT);
 			var->selection = 0;
 			return (0);
 		}
@@ -131,4 +141,3 @@ int		mouse(int button, int x, int y, t_var *var)
 	}
 	return (0);
 }
-

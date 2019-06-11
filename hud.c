@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hud.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 17:58:33 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 17:58:37 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 void		hud_next(t_var *var)
@@ -26,7 +38,7 @@ void		hud(t_var *var)
 		if (var->aa == 1)
 		{
 			s1 = NULL;
-			SP(var->mlx_ptr, var->win_ptr, 50, 735, 0xFFFF00, "anti-aliasing: off");
+			SP(var->mlx_ptr, var->win_ptr, 50, 735, 0xFFFF00, AAOFF);
 		}
 		else
 		{

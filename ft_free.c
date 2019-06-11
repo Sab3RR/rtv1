@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 18:18:48 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 18:18:51 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 int		free_lists(t_o *ob1, t_o *ob2)
@@ -22,7 +34,7 @@ int		free_lists(t_o *ob1, t_o *ob2)
 	return (-1);
 }
 
-t_o	*cp_obj(t_o *obj)
+t_o		*cp_obj(t_o *obj)
 {
 	t_o	*nl;
 
@@ -61,7 +73,6 @@ void	cp_var(t_var *var, t_thr *thr)
 	thr->size_line = var->size_line;
 	thr->aa = var->aa;
 }
-
 
 void	init_var(t_var *var)
 {

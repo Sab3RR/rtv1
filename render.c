@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsusol <vsusol@student.unit.ua>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/11 16:57:42 by vsusol            #+#    #+#             */
+/*   Updated: 2019/06/11 16:57:48 by vsusol           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "inc/rtv1.h"
 
 float	*ray_set(t_thr *thr, float *tab, double x, double y)
@@ -20,7 +32,7 @@ float	*ray_set(t_thr *thr, float *tab, double x, double y)
 	return (tab);
 }
 
-void			ft_put_pixel(t_thr *thr, int x, int y, int color)
+void	ft_put_pixel(t_thr *thr, int x, int y, int color)
 {
 	int				i;
 	unsigned int	p;
@@ -38,7 +50,7 @@ void			ft_put_pixel(t_thr *thr, int x, int y, int color)
 int		rt(t_thr *thr, t_o *obj, double x, double y)
 {
 	float	r[3];
-	t_o	*tmp;
+	t_o		*tmp;
 	double	p;
 	float	*tab;
 
@@ -64,7 +76,7 @@ int		rt(t_thr *thr, t_o *obj, double x, double y)
 	return (0);
 }
 
-void			*p_thread(void *arg)
+void	*p_thread(void *arg)
 {
 	t_tab_thr	*tab;
 	t_thr		*thr;
@@ -93,7 +105,7 @@ void			*p_thread(void *arg)
 	pthread_exit(0);
 }
 
-int				render(t_var *var)
+int		render(t_var *var)
 {
 	pthread_t	thr[P_THREADS];
 	t_tab_thr	tab[P_THREADS];
@@ -104,10 +116,6 @@ int				render(t_var *var)
 	mlx_destroy_image(var->mlx_ptr, var->img_ptr);
 	mlx_clear_window(var->mlx_ptr, var->win_ptr);
 	var->img_ptr = mlx_new_image(var->mlx_ptr, D_WIDTH, D_HEIGHT);
-//	var->aa = 2;
-	var->maxref = 0;
-	var->pref = 1;
-	var->spec = 1;
 	while (++i < P_THREADS)
 	{
 		tab[i].i = i;
